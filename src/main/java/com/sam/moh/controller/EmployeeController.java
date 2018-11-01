@@ -28,7 +28,6 @@ public class EmployeeController {
     @GetMapping("{id}")
     public Optional<Employee> findById(@PathVariable Integer id) {
         return employeeService.findById(id);
-
     }
 
     @PutMapping
@@ -36,11 +35,6 @@ public class EmployeeController {
     employeeService.save(employee);
 
     }
-
-
-//    public void update(Employee employee){
-//       employeeService.update(employee);
-//    }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Integer id){

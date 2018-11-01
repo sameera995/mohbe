@@ -1,6 +1,8 @@
 package com.sam.moh.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,7 +14,7 @@ public class ClinicAllocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne @JoinColumn (name = "clinic_creation_id")
     private ClinicCreation clinicCreation;
 
     @ManyToOne
@@ -26,8 +28,12 @@ public class ClinicAllocation {
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Collection<Employee> employee;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
+
     private String description;
 
     public Integer getId() {
@@ -86,9 +92,7 @@ public class ClinicAllocation {
         this.time = time;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description;  }
 
     public void setDescription(String description) {
         this.description = description;
