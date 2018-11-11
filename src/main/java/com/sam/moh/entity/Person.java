@@ -2,9 +2,14 @@ package com.sam.moh.entity;
 
 import com.sam.moh.entity.enums.Gender;
 import com.sam.moh.entity.enums.PersonType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Person {
@@ -18,11 +23,14 @@ public class Person {
 
     private LocalDate dob;
     private Integer contact;
+    private String address;
 
-    @ManyToOne
-    private Area phiArea;
-
-    private String phmArea;
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "person_area",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "area_id"))
+    private Collection<Area> area;
 
     @Enumerated
     private PersonType personType;
@@ -31,6 +39,9 @@ public class Person {
     private String parentOccupation;
     private Integer numberOfSiblings;
     private String personStatus;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ClinicPerson> clinicPerson;
 
     public Integer getId() {
         return id;
@@ -72,20 +83,12 @@ public class Person {
         this.contact = contact;
     }
 
-    public Area getPhiArea() {
-        return phiArea;
+    public Collection<Area> getArea() {
+        return area;
     }
 
-    public void setPhiArea(Area phiArea) {
-        this.phiArea = phiArea;
-    }
-
-    public String getPhmArea() {
-        return phmArea;
-    }
-
-    public void setPhmArea(String phmArea) {
-        this.phmArea = phmArea;
+    public void setArea(Collection<Area> area) {
+        this.area = area;
     }
 
     public PersonType getPersonType() {
@@ -126,5 +129,21 @@ public class Person {
 
     public void setPersonStatus(String personStatus) {
         this.personStatus = personStatus;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Set<ClinicPerson> getClinicPerson() {
+        return clinicPerson;
+    }
+
+    public void setClinicPerson(Set<ClinicPerson> clinicPerson) {
+        this.clinicPerson = clinicPerson;
     }
 }

@@ -2,11 +2,15 @@ package com.sam.moh.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ClinicAllocation {
@@ -22,11 +26,15 @@ public class ClinicAllocation {
 
     private String place;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "clinicallocation_employee",
             joinColumns = @JoinColumn(name = "clinic_allocation_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Collection<Employee> employee;
+
+    @OneToMany(mappedBy = "clinicAllocation",cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ClinicPerson> clinicPerson;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
@@ -96,5 +104,13 @@ public class ClinicAllocation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<ClinicPerson> getClinicPerson() {
+        return clinicPerson;
+    }
+
+    public void setClinicPerson(Set<ClinicPerson> clinicPerson) {
+        this.clinicPerson = clinicPerson;
     }
 }

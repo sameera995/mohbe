@@ -5,6 +5,7 @@ import com.sam.moh.repository.ClinicAllocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +24,12 @@ public class ClinicAllocationService {
 
     @Transactional
     public Iterable<ClinicAllocation> findAll(){
-        return clinicAllocationRepository.findAll();
+        return clinicAllocationRepository.findAll(sortByIdDesc());
     }
+    public Sort sortByIdDesc() {
+        return new Sort(Sort.Direction.DESC, "id");
+    }
+
 
     @Transactional
     public Optional<ClinicAllocation> findById(Integer id){

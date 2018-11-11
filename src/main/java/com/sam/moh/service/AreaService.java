@@ -1,6 +1,7 @@
 package com.sam.moh.service;
 
 import com.sam.moh.entity.Area;
+import com.sam.moh.entity.enums.AreaType;
 import com.sam.moh.repository.AreaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,4 +38,7 @@ public class AreaService {
         areaRepository.deleteById(id);
     }
 
+
+    @Transactional
+    public Iterable<Area> findAllByAreaType(AreaType areaType){ return areaRepository.findAllByAreaType(areaType);}
 }
