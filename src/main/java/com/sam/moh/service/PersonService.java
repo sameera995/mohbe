@@ -31,9 +31,6 @@ public class PersonService {
     public void save(@RequestBody Person person){personRepository.save(person);}
 
     @Transactional
-    public void delete(Integer id){personRepository.deleteById(id);}
-
-    @Transactional
     public List<Person> search(Person person) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
@@ -41,5 +38,9 @@ public class PersonService {
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example<Person> example = Example.of(person, matcher);
         return personRepository.findAll(example);
+    }
+
+    public List<Person> findAllByEmployeeStatus(String personStatus) {
+        return personRepository.findAllByPersonStatus(personStatus);
     }
 }

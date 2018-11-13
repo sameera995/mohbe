@@ -29,7 +29,7 @@ public class AreaController {
         return areaService.findById(id);
     }
 
-    @GetMapping("areaType/{areaType}")
+    @GetMapping("/areaType/{areaType}")
     public Iterable<Area> findAllByAreaType(@PathVariable AreaType areaType){
         return areaService.findAllByAreaType(areaType);
     }

@@ -32,12 +32,11 @@ public class PersonController {
     @PutMapping
     public void save(@RequestBody Person person){
         personService.save(person);
-
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id){
-        personService.delete(id);
+    @GetMapping("/personStatus/{personStatus}")
+    public List<Person> findAllByEmployeeStatus(@PathVariable String personStatus) {
+        return personService.findAllByEmployeeStatus(personStatus);
     }
 
     @PutMapping("/search")

@@ -1,6 +1,5 @@
 package com.sam.moh.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -12,12 +11,13 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
-public class ClinicAllocation {
+public class CampaignAllocation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne @JoinColumn (name = "clinic_creation_id")
+    @ManyToOne
+    @JoinColumn (name = "clinic_creation_id")
     private ClinicCreation clinicCreation;
 
     @ManyToOne
@@ -85,6 +85,14 @@ public class ClinicAllocation {
         this.employee = employee;
     }
 
+    public Set<ClinicPerson> getClinicPerson() {
+        return clinicPerson;
+    }
+
+    public void setClinicPerson(Set<ClinicPerson> clinicPerson) {
+        this.clinicPerson = clinicPerson;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -101,18 +109,12 @@ public class ClinicAllocation {
         this.time = time;
     }
 
-    public String getDescription() { return description;  }
+    public String getDescription() {
+        return description;
+    }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<ClinicPerson> getClinicPerson() {
-        return clinicPerson;
-    }
-
-    public void setClinicPerson(Set<ClinicPerson> clinicPerson) {
-        this.clinicPerson = clinicPerson;
     }
 
     public String getStatus() {

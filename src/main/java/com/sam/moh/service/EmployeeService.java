@@ -31,12 +31,12 @@ public class EmployeeService {
     }
 
     @Transactional
-    public void save(@RequestBody Employee employee) { employeeRepository.save(employee);
+    public List<Employee> findAllByEmployeeStatus(String employeeStatus){
+        return employeeRepository.findAllByEmployeeStatus(employeeStatus);
     }
 
     @Transactional
-    public void delete(Integer id){
-        employeeRepository.deleteById(id);
+    public void save(@RequestBody Employee employee) { employeeRepository.save(employee);
     }
 
     @Transactional

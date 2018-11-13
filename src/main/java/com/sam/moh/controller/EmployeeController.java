@@ -22,7 +22,6 @@ public class EmployeeController {
     @GetMapping
     public Iterable<Employee> findAll(){
         return employeeService.findAll();
-
     }
 
     @GetMapping("{id}")
@@ -30,15 +29,14 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
+    @GetMapping("/employeeStatus/{employeeStatus}")
+    public List<Employee> findAllByEmployeeStatus(@PathVariable String employeeStatus) {
+        return employeeService.findAllByEmployeeStatus(employeeStatus);
+    }
+
     @PutMapping
     public void save(@RequestBody Employee employee){
     employeeService.save(employee);
-
-    }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id){
-        employeeService.delete(id);
     }
 
     @PutMapping("/search")

@@ -17,6 +17,9 @@ public class Complain {
     @ManyToOne
     private Area area;
 
+    @Column(length=2000)
+    private String complain;
+
     public Integer getId() {
         return id;
     }
@@ -71,5 +74,13 @@ public class Complain {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    public String getComplain() {
+        return complain;
+    }
+
+    public void setComplain(String complain) {
+        this.complain = complain;
     }
 }

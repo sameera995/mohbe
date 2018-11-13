@@ -41,11 +41,6 @@ public class ClinicAllocationService {
     }
 
     @Transactional
-    public void delete(Integer id){
-        clinicAllocationRepository.deleteById(id);
-    }
-
-    @Transactional
     public void update(ClinicAllocation clinicAllocation) {
         clinicAllocationRepository.save(clinicAllocation);
     }

@@ -35,11 +35,6 @@ public class ClinicAllocationController {
 
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Integer id){
-        clinicAllocationService.delete(id);
-    }
-
     @PutMapping("/search")
     public List<ClinicAllocation> search(@RequestBody ClinicAllocation clinicAllocation) {
         return clinicAllocationService.search(clinicAllocation);

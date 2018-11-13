@@ -21,7 +21,7 @@ public class Employee {
     private LocalDate dob;
     private String email;
     private Date assignDate;
-    private Byte employeeStatus;
+    private String employeeStatus;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -92,11 +92,11 @@ public class Employee {
         this.assignDate = assignDate;
     }
 
-    public Byte getEmployeeStatus() {
+    public String getEmployeeStatus() {
         return employeeStatus;
     }
 
-    public void setEmployeeStatus(Byte employeeStatus) {
+    public void setEmployeeStatus(String employeeStatus) {
         this.employeeStatus = employeeStatus;
     }
 
