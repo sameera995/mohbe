@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,16 +31,19 @@ public class ClinicAllocation {
     @JoinTable(name = "clinicallocation_employee",
             joinColumns = @JoinColumn(name = "clinic_allocation_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private Collection<Employee> employee;
+    private List<Employee> employee;
 
     @OneToMany(mappedBy = "clinicAllocation",cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ClinicPerson> clinicPerson;
+    private List<ClinicPerson> clinicPerson;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @JsonFormat(pattern = "HH:mm")
-    private LocalTime time;
+    private LocalTime startTime;
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
 
     private String description;
 
@@ -77,12 +81,16 @@ public class ClinicAllocation {
         this.place = place;
     }
 
-    public Collection<Employee> getEmployee() {
+    public List<Employee> getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Collection<Employee> employee) {
+    public void setEmployee(List<Employee> employee) {
         this.employee = employee;
+    }
+
+    public void setClinicPerson(List<ClinicPerson> clinicPerson) {
+        this.clinicPerson = clinicPerson;
     }
 
     public LocalDate getDate() {
@@ -93,26 +101,26 @@ public class ClinicAllocation {
         this.date = date;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public String getDescription() { return description;  }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<ClinicPerson> getClinicPerson() {
-        return clinicPerson;
-    }
-
-    public void setClinicPerson(Set<ClinicPerson> clinicPerson) {
-        this.clinicPerson = clinicPerson;
     }
 
     public String getStatus() {

@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +24,11 @@ public class ClinicPerson {
     private Integer weight;
     private String vaccination;
     private String thriposha;
+    private String disease;
+    private LocalDate date;
+    private Integer belly;
+    private Double bmi;
+
 
     public int getId() {
         return id;
@@ -78,5 +84,37 @@ public class ClinicPerson {
 
     public void setThriposha(String thriposha) {
         this.thriposha = thriposha;
+    }
+
+    public String getDisease() {
+        return disease;
+    }
+
+    public void setDisease(String disease) {
+        this.disease = disease;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Integer getBelly() {
+        return belly;
+    }
+
+    public void setBelly(Integer belly) {
+        this.belly = belly;
+    }
+
+    public Double getBmi() {
+        return bmi;
+    }
+
+    public void setBmi(Double bmi) {
+        this.bmi = bmi;
     }
 }

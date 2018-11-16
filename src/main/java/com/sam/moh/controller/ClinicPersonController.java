@@ -29,6 +29,11 @@ public class ClinicPersonController {
         return clinicPersonService.findById(id);
     }
 
+    @GetMapping("/person/{id}")
+    public Iterable<ClinicPerson> findByPersonId(@PathVariable Integer id) {
+        return clinicPersonService.findAllByPersonId(id);
+    }
+
     @PutMapping
     public void save(@RequestBody ClinicPerson clinicPerson){
         clinicPersonService.save(clinicPerson);

@@ -1,5 +1,6 @@
 package com.sam.moh.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sam.moh.entity.enums.CivilStatus;
 import com.sam.moh.entity.enums.Designation;
 import com.sam.moh.entity.enums.Gender;
@@ -7,6 +8,7 @@ import com.sam.moh.entity.enums.Gender;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -31,6 +33,14 @@ public class Employee {
 
     @Enumerated(EnumType.STRING)
     private CivilStatus civilStatus;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "employee")
+    private List<ClinicAllocation> clinicAllocationList;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "employee")
+    private List<CampaignAllocation> campaignAllocations;
 
     public Integer getId() {
         return id;
@@ -62,6 +72,14 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<CampaignAllocation> getCampaignAllocations() {
+        return campaignAllocations;
+    }
+
+    public void setCampaignAllocations(List<CampaignAllocation> campaignAllocations) {
+        this.campaignAllocations = campaignAllocations;
     }
 
     public String getContact() {
@@ -122,5 +140,13 @@ public class Employee {
 
     public void setCivilStatus(CivilStatus civilStatus) {
         this.civilStatus = civilStatus;
+    }
+
+    public List<ClinicAllocation> getClinicAllocationList() {
+        return clinicAllocationList;
+    }
+
+    public void setClinicAllocationList(List<ClinicAllocation> clinicAllocationList) {
+        this.clinicAllocationList = clinicAllocationList;
     }
 }

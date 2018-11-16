@@ -24,11 +24,11 @@ public class ClinicAllocationService {
 
     @Transactional
     public Iterable<ClinicAllocation> findAll(){
-        return clinicAllocationRepository.findAll(sortByIdDesc());
+        return clinicAllocationRepository.findAllByOrderById();
     }
-    public Sort sortByIdDesc() {
-        return new Sort(Sort.Direction.DESC, "id");
-    }
+//    public Sort sortByIdDesc() {
+//        return new Sort(Sort.Direction.DESC, "id");
+//    }
 
 
     @Transactional

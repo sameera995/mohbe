@@ -41,7 +41,7 @@ public class Person {
     private String personStatus;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ClinicPerson> clinicPerson;
+    private List<ClinicPerson> clinicPerson;
 
     public Integer getId() {
         return id;
@@ -139,11 +139,11 @@ public class Person {
         this.address = address;
     }
 
-    public Set<ClinicPerson> getClinicPerson() {
+    public List<ClinicPerson> getClinicPerson() {
         return clinicPerson;
     }
 
-    public void setClinicPerson(Set<ClinicPerson> clinicPerson) {
+    public void setClinicPerson(List<ClinicPerson> clinicPerson) {
         this.clinicPerson = clinicPerson;
     }
 }

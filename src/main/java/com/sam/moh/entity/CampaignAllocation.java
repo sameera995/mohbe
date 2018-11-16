@@ -17,8 +17,8 @@ public class CampaignAllocation {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn (name = "clinic_creation_id")
-    private ClinicCreation clinicCreation;
+    @JoinColumn (name = "campaign_creation_id")
+    private CampaignCreation campaignCreation;
 
     @ManyToOne
     private Area area;
@@ -27,19 +27,19 @@ public class CampaignAllocation {
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "clinicallocation_employee",
-            joinColumns = @JoinColumn(name = "clinic_allocation_id"),
+    @JoinTable(name = "campaignallocation_employee",
+            joinColumns = @JoinColumn(name = "campaign_allocation_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     private Collection<Employee> employee;
-
-    @OneToMany(mappedBy = "clinicAllocation",cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ClinicPerson> clinicPerson;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @JsonFormat(pattern = "HH:mm")
-    private LocalTime time;
+    private LocalTime startTime;
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
 
     private String description;
 
@@ -51,14 +51,6 @@ public class CampaignAllocation {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public ClinicCreation getClinicCreation() {
-        return clinicCreation;
-    }
-
-    public void setClinicCreation(ClinicCreation clinicCreation) {
-        this.clinicCreation = clinicCreation;
     }
 
     public Area getArea() {
@@ -85,14 +77,6 @@ public class CampaignAllocation {
         this.employee = employee;
     }
 
-    public Set<ClinicPerson> getClinicPerson() {
-        return clinicPerson;
-    }
-
-    public void setClinicPerson(Set<ClinicPerson> clinicPerson) {
-        this.clinicPerson = clinicPerson;
-    }
-
     public LocalDate getDate() {
         return date;
     }
@@ -101,12 +85,20 @@ public class CampaignAllocation {
         this.date = date;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public String getDescription() {
@@ -123,5 +115,13 @@ public class CampaignAllocation {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public CampaignCreation getCampaignCreation() {
+        return campaignCreation;
+    }
+
+    public void setCampaignCreation(CampaignCreation campaignCreation) {
+        this.campaignCreation = campaignCreation;
     }
 }

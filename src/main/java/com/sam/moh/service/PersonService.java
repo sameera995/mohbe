@@ -1,6 +1,8 @@
 package com.sam.moh.service;
 
 import com.sam.moh.entity.Person;
+import com.sam.moh.entity.enums.PersonType;
+import com.sam.moh.entity.payload.DataSet;
 import com.sam.moh.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.Console;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +43,23 @@ public class PersonService {
         return personRepository.findAll(example);
     }
 
-    public List<Person> findAllByEmployeeStatus(String personStatus) {
+    @Transactional
+    public List<Person> findAllByPersonStatus(String personStatus) {
         return personRepository.findAllByPersonStatus(personStatus);
+    }
+
+    @Transactional
+    public List<Person> findAllByPersonStatusAndPersonType(String personStatus, Integer personType) {
+
+        return personRepository.findAllByPersonStatusAndPersonType(personStatus,personType);
+
+    }
+
+    @Transactional
+    public DataSet getWieghtReport(Integer id) {
+        Person person = personRepository.getOne(id);
+        DataSet dataSet = new DataSet("Actual Weight");
+        person.getClinicPerson().forEach(clinicPerson -> dataSet.getData().add(clinicPerson.getWeight()));
+        return dataSet;
     }
 }

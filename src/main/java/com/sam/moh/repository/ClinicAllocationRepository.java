@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ClinicAllocationRepository extends JpaRepository<ClinicAllocation,Integer> {
 
+    List<ClinicAllocation>findAllByOrderById();
 
 }

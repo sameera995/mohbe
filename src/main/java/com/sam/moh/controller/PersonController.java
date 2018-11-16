@@ -1,6 +1,8 @@
 package com.sam.moh.controller;
 
 import com.sam.moh.entity.Person;
+import com.sam.moh.entity.enums.PersonType;
+import com.sam.moh.entity.payload.DataSet;
 import com.sam.moh.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +37,21 @@ public class PersonController {
     }
 
     @GetMapping("/personStatus/{personStatus}")
-    public List<Person> findAllByEmployeeStatus(@PathVariable String personStatus) {
-        return personService.findAllByEmployeeStatus(personStatus);
+    public List<Person> findAllByPersonStatus(@PathVariable String personStatus) {
+        return personService.findAllByPersonStatus(personStatus);
+    }
+
+    @GetMapping("/personStatusAndType")
+    public List<Person> findAllByPersonStatus(
+            @RequestParam String personStatus,
+            @RequestParam Integer personType) {
+
+        return personService.findAllByPersonStatusAndPersonType(personStatus,personType);
+    }
+
+    @GetMapping("/getWeight/{id}")
+    public DataSet getWeight(@PathVariable Integer id) {
+        return personService.getWieghtReport(id);
     }
 
     @PutMapping("/search")

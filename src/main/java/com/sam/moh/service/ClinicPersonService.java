@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,12 @@ public class ClinicPersonService {
 
     @Transactional
     public Iterable<ClinicPerson> findAll(){
-        return clinicPersonRepository.findAll();
+        return clinicPersonRepository.findAllByOrderByDateDesc();
+    }
+
+    @Transactional
+    public Iterable<ClinicPerson> findAllByPersonId(Integer id){
+        return clinicPersonRepository.findAllByPersonId(id);
     }
 
     @Transactional
@@ -32,7 +38,15 @@ public class ClinicPersonService {
     }
 
     @Transactional
-    public void save(@RequestBody ClinicPerson clinicPerson) { clinicPersonRepository.save(clinicPerson);
+    public void save(@RequestBody ClinicPerson clinicPerson) {
+            clinicPerson.setDate(LocalDate.now());
+
+            double w = Double.parseDouble(clinicPerson.getWeight().toString())/1000;
+            double h = Double.parseDouble(clinicPerson.getHeight().toString())/1000;
+            double hSquare = h*h;
+            double bmi = w/hSquare;
+            clinicPerson.setBmi(bmi);
+        clinicPersonRepository.save(clinicPerson);
     }
 
     @Transactional
