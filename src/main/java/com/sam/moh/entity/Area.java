@@ -1,8 +1,10 @@
 package com.sam.moh.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sam.moh.entity.enums.AreaType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Area {
@@ -16,6 +18,10 @@ public class Area {
 
     @OneToOne
     private Employee employee;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "area")
+    private List<Person> person;
 
     public Integer getId() {
         return id;

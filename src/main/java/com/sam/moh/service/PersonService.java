@@ -1,5 +1,6 @@
 package com.sam.moh.service;
 
+import com.sam.moh.entity.ClinicPerson;
 import com.sam.moh.entity.Person;
 import com.sam.moh.entity.enums.PersonType;
 import com.sam.moh.entity.payload.DataSet;
@@ -49,7 +50,7 @@ public class PersonService {
     }
 
     @Transactional
-    public List<Person> findAllByPersonStatusAndPersonType(String personStatus, Integer personType) {
+    public List<Person> findAllByPersonStatusAndPersonType(String personStatus, PersonType personType) {
 
         return personRepository.findAllByPersonStatusAndPersonType(personStatus,personType);
 
@@ -59,7 +60,10 @@ public class PersonService {
     public DataSet getWieghtReport(Integer id) {
         Person person = personRepository.getOne(id);
         DataSet dataSet = new DataSet("Actual Weight");
-        person.getClinicPerson().forEach(clinicPerson -> dataSet.getData().add(clinicPerson.getWeight()));
+        for (ClinicPerson clinicPerson : person.getClinicPerson()) {
+            dataSet.getData().add(clinicPerson.getWeight());
+        }
+        dataSet.getData().forEach(System.out::println);
         return dataSet;
     }
 }

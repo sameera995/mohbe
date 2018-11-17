@@ -11,6 +11,6 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person,Integer> {
 
     List<Person> findAllByPersonStatus(String personStatus);
-    List<Person> findAllByPersonStatusAndPersonType(String personStatus, Integer personType);
+    List<Person> findAllByPersonStatusAndPersonType(String personStatus, PersonType personType);
 
 }

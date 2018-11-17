@@ -44,7 +44,7 @@ public class PersonController {
     @GetMapping("/personStatusAndType")
     public List<Person> findAllByPersonStatus(
             @RequestParam String personStatus,
-            @RequestParam Integer personType) {
+            @RequestParam PersonType personType) {
 
         return personService.findAllByPersonStatusAndPersonType(personStatus,personType);
     }

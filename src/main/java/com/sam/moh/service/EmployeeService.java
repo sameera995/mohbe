@@ -2,6 +2,7 @@ package com.sam.moh.service;
 
 import com.sam.moh.entity.ClinicAllocation;
 import com.sam.moh.entity.Employee;
+import com.sam.moh.entity.enums.Designation;
 import com.sam.moh.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -38,6 +39,11 @@ public class EmployeeService {
     @Transactional
     public List<Employee> findAllByEmployeeStatus(String employeeStatus) {
         return employeeRepository.findAllByEmployeeStatus(employeeStatus);
+    }
+
+    @Transactional
+    public List<Employee> findAllByDesignation(Designation designation) {
+        return employeeRepository.findAllByDesignation(designation);
     }
 
     @Transactional
